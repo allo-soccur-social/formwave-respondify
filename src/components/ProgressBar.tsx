@@ -6,9 +6,9 @@ const ProgressBar: React.FC = () => {
   const { progress } = useForm();
   
   return (
-    <div className="w-full h-1 bg-slate-100">
+    <div className="w-full h-2 bg-slate-100">
       <div 
-        className="h-full bg-blue-500 transition-all duration-300 ease-in-out" 
+        className="h-full bg-blue-500 transition-all duration-300 ease-in-out rounded-full" 
         style={{ width: `${progress}%` }}
       ></div>
     </div>

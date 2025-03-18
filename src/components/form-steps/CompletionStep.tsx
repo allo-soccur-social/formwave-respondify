@@ -25,7 +25,7 @@ const CompletionStep: React.FC = () => {
         </p>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto mb-6">
         <div className="bg-slate-50 p-6 rounded-xl">
           <h3 className="font-medium mb-2 flex items-center gap-2">
             <span className="w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center text-xs">1</span>
@@ -45,6 +45,66 @@ const CompletionStep: React.FC = () => {
             Your matched contractor will call you shortly at {formData.phone} to discuss your project in detail.
           </p>
         </div>
+      </div>
+
+      <div className="bg-slate-50 p-6 rounded-xl max-w-2xl mx-auto mb-8">
+        <h3 className="font-medium mb-4">Your Project Details</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+          <div>
+            <p className="font-medium">ZIP Code:</p>
+            <p className="text-slate-600">{formData.zipCode}</p>
+          </div>
+          <div>
+            <p className="font-medium">Cabinet Condition:</p>
+            <p className="text-slate-600">{formData.condition}</p>
+          </div>
+          <div>
+            <p className="font-medium">Refacing Option:</p>
+            <p className="text-slate-600">{formData.refacingOption}</p>
+          </div>
+          <div>
+            <p className="font-medium">Layout Changes:</p>
+            <p className="text-slate-600">{formData.otherChanges.join(', ')}</p>
+          </div>
+          <div>
+            <p className="font-medium">Other Elements:</p>
+            <p className="text-slate-600">{formData.otherElements.join(', ')}</p>
+          </div>
+          <div>
+            <p className="font-medium">Kitchen Size:</p>
+            <p className="text-slate-600">{formData.kitchenSize}</p>
+          </div>
+          <div>
+            <p className="font-medium">Property Type:</p>
+            <p className="text-slate-600">{formData.propertyType}</p>
+          </div>
+          <div>
+            <p className="font-medium">Authorized:</p>
+            <p className="text-slate-600">{formData.isAuthorized ? 'Yes' : 'No'}</p>
+          </div>
+          <div>
+            <p className="font-medium">Budget:</p>
+            <p className="text-slate-600">{formData.budget}</p>
+          </div>
+          <div>
+            <p className="font-medium">Name:</p>
+            <p className="text-slate-600">{formData.name}</p>
+          </div>
+          <div>
+            <p className="font-medium">Email:</p>
+            <p className="text-slate-600">{formData.email}</p>
+          </div>
+          <div>
+            <p className="font-medium">Phone:</p>
+            <p className="text-slate-600">{formData.phone}</p>
+          </div>
+        </div>
+        {formData.comments && (
+          <div className="mt-4">
+            <p className="font-medium">Additional Comments:</p>
+            <p className="text-slate-600">{formData.comments}</p>
+          </div>
+        )}
       </div>
     </div>
   );
