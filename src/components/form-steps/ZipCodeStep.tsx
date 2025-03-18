@@ -5,7 +5,7 @@ import FormNavigation from "@/components/FormNavigation";
 import { toast } from "sonner";
 
 const ZipCodeStep: React.FC = () => {
-  const { formData, updateFormData } = useForm();
+  const { formData, updateFormData, nextStep } = useForm();
   const [zipCode, setZipCode] = useState(formData.zipCode);
   const [isValid, setIsValid] = useState(true);
 
@@ -15,15 +15,15 @@ const ZipCodeStep: React.FC = () => {
     setIsValid(value.length === 5);
   };
 
-  const handleNext = () => {
+  const handleContinue = () => {
     if (zipCode.length !== 5) {
       setIsValid(false);
       toast.error("Please enter a valid 5-digit ZIP code");
-      return false;
+      return;
     }
     
     updateFormData({ zipCode });
-    return true;
+    nextStep();
   };
 
   return (
@@ -48,7 +48,7 @@ const ZipCodeStep: React.FC = () => {
           />
           
           <button
-            onClick={handleNext}
+            onClick={handleContinue}
             disabled={!zipCode || zipCode.length !== 5}
             className="button-primary ml-2"
           >
@@ -62,7 +62,10 @@ const ZipCodeStep: React.FC = () => {
       </div>
       
       <FormNavigation 
-        onNext={handleNext} 
+        onNext={() => {
+          updateFormData({ zipCode });
+          return true;
+        }} 
         nextDisabled={!zipCode || zipCode.length !== 5}
         showBackButton={false}
         className="hidden"

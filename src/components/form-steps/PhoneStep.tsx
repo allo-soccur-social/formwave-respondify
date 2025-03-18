@@ -5,7 +5,7 @@ import FormNavigation from "@/components/FormNavigation";
 import { toast } from "sonner";
 
 const PhoneStep: React.FC = () => {
-  const { formData, updateFormData } = useForm();
+  const { formData, updateFormData, nextStep } = useForm();
   const [phone, setPhone] = useState(formData.phone || "");
   
   const formatPhoneNumber = (value: string) => {
@@ -25,16 +25,16 @@ const PhoneStep: React.FC = () => {
     setPhone(formattedPhone);
   };
   
-  const handleNext = () => {
+  const handleGetEstimate = () => {
     const digitsOnly = phone.replace(/\D/g, "");
     
     if (digitsOnly.length !== 10) {
       toast.error("Please enter a valid 10-digit phone number");
-      return false;
+      return;
     }
     
     updateFormData({ phone });
-    return true;
+    nextStep();
   };
 
   return (
@@ -62,7 +62,8 @@ const PhoneStep: React.FC = () => {
         </div>
         
         <button 
-          onClick={() => handleNext() && updateFormData({ phone })}
+          onClick={handleGetEstimate}
+          disabled={phone.replace(/\D/g, "").length !== 10}
           className="button-primary w-full mt-4"
         >
           Get My Estimate
@@ -70,7 +71,10 @@ const PhoneStep: React.FC = () => {
       </div>
       
       <FormNavigation 
-        onNext={handleNext} 
+        onNext={() => {
+          updateFormData({ phone });
+          return true;
+        }} 
         nextDisabled={phone.replace(/\D/g, "").length !== 10}
         className="hidden"
       />

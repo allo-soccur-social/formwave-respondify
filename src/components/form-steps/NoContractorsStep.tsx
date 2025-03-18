@@ -4,7 +4,15 @@ import FormNavigation from "@/components/FormNavigation";
 import { useForm } from "@/context/FormContext";
 
 const NoContractorsStep: React.FC = () => {
-  const { formData } = useForm();
+  const { formData, nextStep, prevStep } = useForm();
+  
+  const handleContinue = () => {
+    nextStep();
+  };
+  
+  const handleGoBack = () => {
+    prevStep();
+  };
   
   return (
     <div className="form-step">
@@ -18,10 +26,16 @@ const NoContractorsStep: React.FC = () => {
       </div>
       
       <div className="flex justify-center gap-4">
-        <button className="button-secondary">
+        <button 
+          className="button-secondary"
+          onClick={handleGoBack}
+        >
           I'll come back later
         </button>
-        <button className="button-primary">
+        <button 
+          className="button-primary"
+          onClick={handleContinue}
+        >
           Continue anyway
         </button>
       </div>
