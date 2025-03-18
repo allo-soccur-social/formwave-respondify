@@ -5,6 +5,21 @@ import { useForm } from "@/context/FormContext";
 const CompletionStep: React.FC = () => {
   const { formData } = useForm();
   
+  // Helper function to render array values as a bulleted list
+  const renderArrayItems = (items: string[]) => {
+    if (!items || items.length === 0) return "None selected";
+    
+    if (items.length === 1) return items[0];
+    
+    return (
+      <ul className="list-disc pl-5 mt-1">
+        {items.map((item, index) => (
+          <li key={index} className="text-slate-600">{item}</li>
+        ))}
+      </ul>
+    );
+  };
+  
   return (
     <div className="form-step">
       <div className="flex flex-col items-center text-center mb-8">
@@ -64,11 +79,11 @@ const CompletionStep: React.FC = () => {
           </div>
           <div>
             <p className="font-medium">Layout Changes:</p>
-            <p className="text-slate-600">{formData.otherChanges.join(', ')}</p>
+            <div className="text-slate-600">{renderArrayItems(formData.otherChanges)}</div>
           </div>
           <div>
             <p className="font-medium">Other Elements:</p>
-            <p className="text-slate-600">{formData.otherElements.join(', ')}</p>
+            <div className="text-slate-600">{renderArrayItems(formData.otherElements)}</div>
           </div>
           <div>
             <p className="font-medium">Kitchen Size:</p>
